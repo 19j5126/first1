@@ -8,20 +8,17 @@
 <body>
 <a-scene>
   <a-assets>
-  　<video id="video" src="tobira1.MP4" preload="auto" autoplay></video>
+  　<video id="video" src="haneda.MP4" preload="auto" autoplay loop></video>
   </a-assets>
-  <a-videosphere src="#video" rotation="0 -90 0"></a-videosphere>
+
+
+  <a-videosphere src="#video" rotation="0 -65 0"></a-videosphere>
   <!-- 動画の autoplay が効かない場合用の、再生・停止ボタン -->
-  <a-box id="play" position="2 1.5 -4" scale="1 1 1" color="#00000000" opacity="0"></a-box>
+  <a-box id="play" position="-0.5 0 -1" scale="0.2 0.2 0.2" color="blue"></a-box>
+  <a-box id="stop" position="0.5 0 -1" scale="0.2 0.2 0.2" color="red"></a-box>
+  <a-sphere id="link1" position="1 3 -4" scale="1 1 1" src="gazou1.jpg" linkbox></a-sphere>
 
-
-  
-  <!-- リンク用のbox -->
-  <a-box id="link" position="-0.4 1.5 -4" scale="3 3 1" color="#00000000" material="opacity: 0;" linkbox></a-box>
-  
   <!-- 再生・停止ボタンを押すための視線カーソル（スマホ用） -->
-
-  <!-- TODO:視点 -->
   <a-camera>
     <a-cursor fuse="true" fuse-timeout="500"></a-cursor>
   </a-camera>
@@ -34,6 +31,10 @@ const video = document.getElementById("video");   // 動画の取得
 const btnPlay = document.getElementById("play");  // 再生ボタンの取得
 btnPlay.addEventListener("click", (e) => {        // クリックされたら
   video.play();                                   // 動画を再生
+});
+const btnStop = document.getElementById("stop");  // 停止ボタンの取得
+btnStop.addEventListener("click", (e) => {        // クリックされたら
+  video.pause();                                  // 動画を停止
 });
 </script>
 
@@ -55,40 +56,8 @@ btnPlay.addEventListener("click", (e) => {        // クリックされたら
   });
  
 </script>
-  
-<script>
-  // ジャイロセンサーが有効か？
-if(window.DeviceOrientationEvent){
-    // ★iOS13向け: ユーザーにアクセスの許可を求める関数があるか？
-    if(DeviceOrientationEvent.requestPermission){
-        var sensor_contents= document.getElementById("sensor_contents");
-        // id="sensor_contents" な要素がクリックされたら
-        sensor_contents.addEventListener("click", function(){
-            // ★ジャイロセンサーのアクセス許可をリクエストする
-            DeviceOrientationEvent.requestPermission().then(function(response){
-                // リクエストが許可されたら
-                if(response === "granted"){
-                    // deviceorientationが有効化される
-                }
-            }).catch(function(e){
-                console.log(e);
-            });
-        });
-    // iOS13以外
-    }else{
-        // 何もしない
-    }
-}
- 
-// 従来の処理
-// deviceorientationだったりdevicemotionだったりする
-function deviceorientationHandler(){
-    // ※※※※※※※※※※※※※※※※
-    //   ここに従来の処理を書いていく
-    // ※※※※※※※※※※※※※※※※
-}
-window.addEventListener("deviceorientation", deviceorientationHandler);
-</script>
+
+
 
 </body>
 </html>
